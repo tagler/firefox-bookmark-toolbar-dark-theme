@@ -4,6 +4,24 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
+/* fix for bookmark menu bar dropdowns
+/* 1. Strip the default double/outer borders and variables from the menu popup */
+menupopup {
+    border: none !important;
+    --menu-border-color: transparent !important;
+    --panel-border-color: transparent !important;
+    appearance: none !important;
+}
+/* 2. Apply a clean, single border to the inner container */
+menupopup .menupopup-arrowscrollbox,
+menupopup::part(arrowscrollbox) {
+    border: 1px solid #4a4a4a !important; /* Adjust this hex code to match your dark theme */
+    border-radius: 6px !important;        /* Keeps the edges nicely rounded */
+    
+    /* Optional: Re-add a subtle shadow if removing the native borders made it look too flat */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4) !important; 
+}
+
 /* remove 'open all in tabs' option */
 .openintabs-menuseparator,
 .openintabs-menuitem,
@@ -58,7 +76,7 @@
 /* Tab bar: text and icons  */
 .tab-text {
   padding-left: 3.5px !important;
-  padding-bottom: 1.5px !important; 
+  padding-bottom: 2.8px !important; 
 }
 .tab-icon-image  {  
   margin-bottom: 3px !important;
