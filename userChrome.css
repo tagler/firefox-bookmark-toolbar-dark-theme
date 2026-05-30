@@ -4,24 +4,6 @@
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-/* fix for bookmark menu bar dropdowns
-/* 1. Strip the default double/outer borders and variables from the menu popup */
-menupopup {
-    border: none !important;
-    --menu-border-color: transparent !important;
-    --panel-border-color: transparent !important;
-    appearance: none !important;
-}
-/* 2. Apply a clean, single border to the inner container */
-menupopup .menupopup-arrowscrollbox,
-menupopup::part(arrowscrollbox) {
-    border: 1px solid #4a4a4a !important; /* Adjust this hex code to match your dark theme */
-    border-radius: 6px !important;        /* Keeps the edges nicely rounded */
-    
-    /* Optional: Re-add a subtle shadow if removing the native borders made it look too flat */
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4) !important; 
-}
-
 /* remove 'open all in tabs' option */
 .openintabs-menuseparator,
 .openintabs-menuitem,
@@ -107,24 +89,29 @@ menupopup::part(arrowscrollbox) {
 }
 
 /* compact bookmark menu dropdown menu */
-menupopup[placespopup="true"]{
-  padding: 0 !important;
-  margin: 0 !important;
-  --arrowpanel-background: var(--menu-background-color) !important;
-  border-radius: var(--panel-border-radius) !important;
+menupopup[placespopup="true"] {
+ padding: 0 !important;
+ margin: 0 !important;
+ --arrowpanel-background: #202124 !important;
+ --panel-background: #202124 !important;
+ --menu-border-color: transparent !important;
+ --panel-border-color: transparent !important;
+ appearance: none !important;
+ border: none !important;
+ background-color: transparent !important;
 }
-.menupopup-arrowscrollbox{
-  margin-top: 1px !important;
-  border: 0.5px solid var(--panel-border-color) !important;
-  padding: 3.5px !important;
-  border-radius: 1px !important;
+
+menupopup::part(content) {
+ background-color: #202124 !important;
+ border: none !important;
 }
-:where(menupopup[placespopup="true"]) menu,
-:where(menupopup[placespopup="true"]) menuitem{
-  margin-inline: 0 !important;
-  padding-inline-start: 1em !important;
-  border-radius: 0.35em !important;
-  padding-block: 0 !important;
+
+.menupopup-arrowscrollbox {
+ margin-top: 1px !important;
+ border: none !important;
+ padding: 0px !important; /* Changed from 3.5px to remove the thick faux-border edge */
+ border-radius: 4px !important;
+ background-color: #202124 !important;
 }
 
 /* bookmarks toolbar */
